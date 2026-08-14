@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Grimoire de Brumm de la Mousse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=MedievalSharp&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * { box-sizing: border-box; }
+        
+        body {
+            background-color: #fcfaf2;
+            color: #1a1a1a;
+            font-family: 'Lexend', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            letter-spacing: 0.04em;
+            word-spacing: 0.1em;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        /* STYLE ÉCRAN : Compact et fluide */
+        .page {
+            background: #fffdf9;
+            border: 3px solid #5c4033;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 0 auto 30px auto;
+            max-width: 850px;
+            padding: 35px 35px 60px 35px;
+            position: relative;
+        }
+
+        .page-legendary {
+            border: 4px solid #d4af37;
+            background: #fffef2;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Lexend', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: #777;
+            background: rgba(0,0,0,0.03);
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        h1, h2, h4 {
+            color: #3b2b1a;
+            font-family: 'MedievalSharp', cursive;
+            margin: 0;
+            text-align: center;
+        }
+
+        h1 {
+            border-bottom: 3px double #5c4033;
+            font-size: 30px;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .page-legendary h1 {
+            border-bottom: 3px double #d4af37;
+            color: #aa7c11;
+        }
+
+        h2 {
+            border-bottom: 2px solid #5c4033;
+            font-size: 22px;
+            margin: 20px 0 15px 0;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        .page-legendary h2 {
+            border-bottom: 2px solid #d4af37;
+            color: #3b2b1a;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .spell-box {
+            border: 2px solid rgba(92, 64, 51, 0.4);
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .spell-box-large {
+            border: 3px solid #d4af37;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .spell-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px dashed rgba(92, 64, 51, 0.2);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+
+        .page-legendary .spell-header {
+            border-bottom: 2px dashed rgba(212, 175, 55, 0.3);
+        }
+
+        .spell-header i {
+            font-size: 24px;
+            width: 30px;
+            text-align: center;
+        }
+
+        /* Couleurs des icônes */
+        .icon-gourdin { color: #8b5a2b; }
+        .icon-fouet { color: #2d5a27; }
+        .icon-flamme { color: #df4726; }
+        .icon-poison { color: #7b2cbf; }
+        .icon-art { color: #2a9d8f; }
+        .icon-assistance { color: #e9c46a; }
+        .icon-reparation { color: #457b9d; }
+        .icon-resistance { color: #e63946; }
+        .icon-provoc { color: #d4af37; }
+        .icon-vision { color: #3d5a80; }
+        .icon-resilience { color: #2a9d8f; }
+        .icon-robustesse { color: #e63946; }
+        .icon-pierre { color: #6d6875; }
+        .icon-telepathie { color: #4361ee; }
+        .icon-peau { color: #7f5539; }
+        .icon-moisson { color: #ff007f; }
+        .icon-omniscience { color: #ffb703; }
+        .icon-soin { color: #4caf50; }
+        .icon-racine { color: #388e3c; }
+        .icon-lumiere { color: #ffeb3b; text-shadow: 0 0 2px #000; }
+        .icon-vitesse { color: #ff5722; }
+        .icon-baie { color: #e91e63; }
+        .icon-lune { color: #00bcd4; }
+        .icon-discretion { color: #607d8b; }
+        .icon-metal { color: #ff9800; }
+        .icon-eau { color: #0077b6; }
+        .icon-detection { color: #9e2a2b; }
+        .icon-animaux { color: #6c584c; }
+        .icon-charme { color: #ff4d6d; }
+        .icon-brouillard { color: #bde0fe; }
+        .icon-vent { color: #a8dadc; }
+
+        .spell-title {
+            font-family: 'Lexend', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: #3b2b1a;
+        }
+
+        .meta {
+            font-size: 13px;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        strong { 
+            color: #8b0000; 
+            font-weight: 700;
+            background-color: rgba(139, 0, 0, 0.05);
+            padding: 0 4px;
+            border-radius: 3px;
+        }
+
+        ul { margin: 5px 0; padding-left: 22px; }
+        li { margin-bottom: 5px; }
+
+        .wildshape-notice {
+            background: rgba(45, 90, 39, 0.1);
+            border: 1px solid #2d5a27;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        /* CONFIGURATION IMPRESSION ABSOLUE SANS BUGS */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+            
+            body { 
+                background: white; 
+                padding: 0; 
+                margin: 0;
+                font-size: 14px;
+            }
+            
+            .page {
+                margin: 0;
+                box-shadow: none;
+                background: #fffdf9;
+                border: 2px solid #5c4033;
+                width: 210mm;
+                height: 297mm;
+                padding: 25px 30px 50px 30px;
+                page-break-after: always;
+                break-after: page;
+                break-inside: avoid;
+                overflow: hidden;
+            }
+            
+            .page-legendary {
+                border: 3px solid #d4af37;
+                background: #fffef2;
+            }
+
+            .grid { gap: 12px; }
+            .spell-box { padding: 10px 12px; }
+            .spell-box-large { padding: 15px 20px; margin-bottom: 15px; }
+            h2 { margin: 12px 0 8px 0; font-size: 20px; }
+            p { margin: 4px 0; }
+            .page-number { bottom: 15px; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <a href="index.html" class="btn-back">⬅️ Retour à l'accueil</a>
+    <h1>Aptitudes de Sang & d'Aventurier</h1>
+    
+    <h2>I. Traits Raciaux (Nain des Collines)</h2>
+    <div class="grid">
+        
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-eye icon-vision"></i>
+                <span class="spell-title">Vision dans le Noir</span>
+            </div>
+            <div class="meta">Passif | Portée : 18 mètres</div>
+            <p>Je vois dans le noir complet comme s'il s'agissait d'une lumière tamisée. Rien de ce qui se tapit dans les ombres souterraines ne peut m'échapper.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-shield-heart icon-resilience"></i>
+                <span class="spell-title">Résilience Naine</span>
+            </div>
+            <div class="meta">Passif | Défensif</div>
+            <p>J'ai un <strong>avantage</strong> sur mes jets de sauvegarde contre le <strong>poison</strong>, et je bénéficie d'une <strong>résistance</strong> à ses dégâts.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-heart-circle-plus icon-robustesse"></i>
+                <span class="spell-title">Robustesse Naine</span>
+            </div>
+            <div class="meta">Passif de Race</div>
+            <p>Mon endurance est légendaire. Je gagne définitivement un bonus de <strong>+1 PV max par niveau</strong> (déjà appliqué).</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-mountain icon-pierre"></i>
+                <span class="spell-title">Connaissance de la Pierre</span>
+            </div>
+            <div class="meta">Passif | Connaissance</div>
+            <p>Je dispose d'un <strong>bonus d'histoire et d'orientation</strong> dès que cela concerne des structures en pierre ou de la roche brute.</p>
+        </div>
+
+    </div>
+
+    <h2>II. Arsenal & Aptitudes d'Aventurier</h2>
+    <div class="grid">
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-comments icon-telepathie"></i>
+                <span class="spell-title">Télépathie de Groupe</span>
+            </div>
+            <div class="meta">Aventurier | Portée : Illimitée</div>
+            <p>Je peux communiquer directement par la pensée avec tous les membres de mon groupe, transcendant les distances.</p>
+        </div>
+
+        <div class="spell-box">
+    <div class="spell-header">
+        <i class="fa-solid fa-gavel icon-gourdin"></i>
+        <span class="spell-title">Attaque au Bâton</span>
+    </div>
+    <div class="meta">1 Action | Corps à corps (1,5m)</div>
+    <p style="margin-bottom: 8px;">• <strong>Normal :</strong> Dégâts 1d6 (1 main) / 1d8 (2 mains) + Force.<br>
+    <span style="font-size: 12px; color: #666; font-style: italic;">(Toucher : d20 + Force + 2 de maîtrise)</span></p>
+    
+    <p>• <strong>Sous Gourdin Magique :</strong> Dégâts <strong>1d8 + Sagesse (magique)</strong>.<br>
+    <span style="font-size: 12px; color: #666; font-style: italic;">(Toucher : d20 + Sagesse + 2 de maîtrise)</span></p>
+</div>
+    </div>
+    
+    <div class="page-number">- Page 1 -</div>
+</div>
+
+<div class="page page-legendary">
+    <h1>Bénédictions & Dons Légendaires</h1>
+    
+    <div class="spell-box-large">
+        <div class="spell-header">
+            <i class="fa-solid fa-gem icon-peau"></i>
+            <span class="spell-title" style="font-size: 20px;">Peau de Roche Épineuse</span>
+        </div>
+        <div class="meta">Bénédiction Légendaire | Défensif / Rétribution</div>
+        <ul>
+            <li><strong>Forteresse :</strong> Bonus permanent de <strong>+2 à ma Classe d'Armure (CA)</strong> sous toutes mes formes.</li>
+            <li><strong>Rétribution :</strong> Si je subis des dégâts, je lance <strong>1d6</strong> : le résultat est <strong>soustrait des dégâts reçus</strong> et <strong>renvoyé</strong> à l'attaquant (à 3m ou moins).</li>
+            <li>Dégâts au choix : <strong>perforant</strong> (épines) ou <strong>contondant</strong> (choc rocheux).</li>
+        </ul>
+    </div>
+
+    <div class="spell-box-large">
+        <div class="spell-header">
+            <i class="fa-solid fa-fist-raised icon-moisson"></i>
+            <span class="spell-title" style="font-size: 20px;">Moisson de l'Étincelle Vitale</span>
+        </div>
+        <div class="meta">Bénédiction Légendaire | Récupération</div>
+        <p>Je récupère instantanément des PV égaux à mon <strong>Niveau de Druide + Sagesse</strong> à chaque coup de grâce infligé à un ennemi. Au niveau 3, cela me soigne de <strong>7 PV directement</strong>.</p>
+        <p>Ce flux soigne ma forme actuelle : la <strong>forme animale</strong> (Loup/Ours) ou mon <strong>Nain</strong>.</p>
+    </div>
+
+    <div class="spell-box-large">
+        <div class="spell-header">
+            <i class="fa-solid fa-book-open-reader icon-omniscience"></i>
+            <span class="spell-title" style="font-size: 20px;">Omniscience de la Faune</span>
+        </div>
+        <div class="meta">Bénédiction Légendaire | Connaissance / Forme Sauvage</div>
+        <ul>
+            <li><strong>Liberté Sauvage :</strong> La restriction d'avoir "déjà vu" un animal pour adopter sa Forme Sauvage est <strong>totalement supprimée</strong>.</li>
+            <li><strong>Instinct :</strong> Je <strong>réussis automatiquement</strong> tous mes tests pour identifier, pister ou comprendre les animaux sauvages.</li>
+        </ul>
+    </div>
+    
+    <div class="page-number">- Page 2 -</div>
+</div>
+
+<div class="page">
+    <h1>Mes Sorts Mineurs</h1>
+    
+    <h2 style="margin-top: 10px; margin-bottom: 5px;">I. Sorts de Combat</h2>
+    <div class="grid">
+        
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-wand-sparkles icon-gourdin"></i>
+                <span class="spell-title">Gourdin magique</span>
+            </div>
+            <div class="meta">Action bonus | Contact | 1 minute</div>
+            <p>Insuffle la puissance de la nature dans mon bâton. J'utilise ma <strong>Sagesse</strong> au lieu de ma Force pour les attaques. Les dégâts deviennent un <strong>d8 magique</strong>.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-seedling icon-fouet"></i>
+                <span class="spell-title">Fouet d'épines</span>
+            </div>
+            <div class="meta">1 action | 9 mètres | Instantanée</div>
+            <p>Crée une liane d'épines. Attaque magique à distance : <strong>1d6 dégâts perforants</strong> et tire la cible de <strong>3 mètres</strong> vers moi.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-fire-flame-curved icon-flamme"></i>
+                <span class="spell-title">Produire de la flamme</span>
+            </div>
+            <div class="meta">1 action | Personnel (9m) | 10 min.</div>
+            <p>Une flamme éclaire sur 6m dans ma main. Je peux la jeter pour infliger <strong>1d8 dégâts de feu</strong>, ce qui met fin au sort.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-skull icon-poison"></i>
+                <span class="spell-title">Vaporisation de poison</span>
+            </div>
+            <div class="meta">1 action | 3 mètres | Instantanée</div>
+            <p>Projette un nuage toxique. La cible doit réussir un jet de <strong>Constitution</strong> ou subir <strong>1d12 dégâts de poison</strong>.</p>
+        </div>
+
+    </div>
+    
+    <h2 style="margin-top: 15px; margin-bottom: 5px;">II. Sorts Utilitaires</h2>
+    <div class="grid">
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-cloud-sun icon-art"></i>
+                <span class="spell-title">Art druidique</span>
+            </div>
+            <div class="meta">1 action | 9 mètres | Instantanée</div>
+            <p>Effets mineurs : prédire la météo locale, faire éclore une fleur, créer un petit son/odeur naturelle, ou allumer/éteindre un petit feu de camp.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-star icon-assistance"></i>
+                <span class="spell-title">Assistance (Guidance)</span>
+            </div>
+            <div class="meta">1 action | Contact | Conc. (1 min)</div>
+            <p>Je touche un allié. Il peut ajouter <strong>1d4</strong> au jet de caractéristique de son choix avant la fin du sort.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-hammer icon-reparation"></i>
+                <span class="spell-title">Réparation</span>
+            </div>
+            <div class="meta">1 minute | Contact | Instantanée</div>
+            <p>Répare une cassure ou une déchirure unique sur un objet (max 30 cm). Idéal pour réparer un outil, une clé ou une corde.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-shield-halved icon-resistance"></i>
+                <span class="spell-title">Résistance</span>
+            </div>
+            <div class="meta">1 action | Contact | Conc. (1 min)</div>
+            <p>Je protège un allié. Il peut ajouter <strong>1d4</strong> à un jet de sauvegarde de son choix avant la fin du sort.</p>
+        </div>
+
+    </div>
+    
+    <div class="page-number">- Page 3 -</div>
+</div>
+
+<div class="page page-legendary">
+    <h1>Dons de la Nature</h1>
+    
+    <div class="spell-box-large" style="margin-top: 15px;">
+        <div class="spell-header">
+            <i class="fa-solid fa-spa icon-provoc" style="font-size: 26px;"></i>
+            <span class="spell-title" style="font-size: 22px;">Éclosion Provocatrice</span>
+        </div>
+        <div class="meta">Tour de magie Légendaire (Niveau 0) | 1 Action | Zone : Rayon de 3m | Durée : 1 tour</div>
+        
+        <p style="margin: 6px 0;">Fait jaillir une <strong>fleur magnifique</strong> dégageant un parfum captivant.</p>
+        <p style="margin: 6px 0;">Toutes les créatures hostiles de mon choix dans un rayon de <strong>3 mètres</strong> voient leurs sens altérés : elles sont <strong>obligées d'attaquer Brumm</strong> à leur prochain tour, ignorant totalement mes alliés plus fragiles.</p>
+
+        <div class="wildshape-notice" style="margin-top: 10px; padding: 6px 12px;">
+            <i class="fa-solid fa-paw"></i> <strong>Symbiose Sauvage :</strong> Je peux utiliser ce sort librement lorsque je suis transformé en <strong>Forme Sauvage</strong>.
+        </div>
+    </div>
+
+    <div class="spell-box-large" style="margin-top: 20px;">
+        <div class="spell-header">
+            <i class="fa-solid fa-burst icon-flamme" style="font-size: 26px;"></i>
+            <span class="spell-title" style="font-size: 22px;">Grondement du Prédateur</span>
+        </div>
+        <div class="meta">Sort Unique (Parchemin) | Action Bonus | Aura : Rayon de 3m (2 cases) | Durée : Ce tour</div>
+        
+        <p style="margin: 6px 0;">Brumm fracasse violemment le sol <em>(du pied, du bâton ou des pattes)</em> en poussant un grondement sauvage et sourd. La terre se fissure et mon regard dominant glace le sang des ennemis proches.</p>
+        
+        <p style="margin: 6px 0 2px 0;"><strong>Effets tactiques (touche TOUS les ennemis dans la zone) :</strong></p>
+        <ul style="padding-left: 20px; margin: 0 0 10px 0;">
+            <li><strong>Garde Brisée (-2 CA) :</strong> Terrifiés et déstabilisés, les monstres ouvrent des brèches. Ils subissent un malus de <strong>-2 à leur Classe d'Armure (CA)</strong> pour le tour en cours.</li>
+            <li><strong>Esprit Ébranlé :</strong> Choqués par la puissance du cri, ils perdent leur concentration et subissent le <strong>Désavantage</strong> sur leur prochain jet de sauvegarde ce tour-ci.</li>
+        </ul>
+
+        <div class="wildshape-notice" style="margin-top: 5px; padding: 6px 12px;">
+            <i class="fa-solid fa-paw"></i> <strong>Condition :</strong> Utilisable sous ma forme normale (Nain) <strong>OU</strong> sous <strong>Forme Sauvage</strong>.
+        </div>
+    </div>
+    
+    <div class="page-number">- Page 4 -</div>
+</div>
+
+<div class="page">
+    <h1>Sorts de Niveau 1 (Page 1/2)</h1>
+    
+    <h2 style="margin-top: 10px; margin-bottom: 5px;">I. Combat & Protection tactique</h2>
+    <div class="grid">
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-leaf icon-racine"></i>
+                <span class="spell-title">Enchevêtrement</span>
+            </div>
+            <div class="meta">1 action | 27 mètres | Conc. (1 min)</div>
+            <p>Zone carrée de 6m de côté. Terrain difficile. Les créatures qui ratent un jet de <strong>Force</strong> sont <strong>entravées</strong> par les plantes.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-wand-magic-sparkles icon-lumiere"></i>
+                <span class="spell-title">Lueur féerique</span>
+            </div>
+            <div class="meta">1 action | 18 mètres | Conc. (1 min)</div>
+            <p>Zone de 6m. Les cibles manquant un jet de <strong>Dextérité</strong> sont entourées d'une aura. Avantage sur les jets d'attaque contre elles. Annule l'invisibilité.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-wind icon-reparation"></i>
+                <span class="spell-title">Vague de tonnerre</span>
+            </div>
+            <div class="meta">1 action | Personnel (cube de 4,5m)</div>
+            <p>Fracas magique. Échec au jet de <strong>Constitution</strong> : <strong>2d8 dégâts de tonnerre</strong> et repoussé de 3 mètres. Idéal si encerclé.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-person-running icon-vitesse"></i>
+                <span class="spell-title">Grand pas</span>
+            </div>
+            <div class="meta">1 action | Contact | Durée : 1 heure</div>
+            <p>Augmente la vitesse de déplacement d'une créature de <strong>+3 mètres</strong>. Excellent avant de passer en <strong>Forme Sauvage</strong> !</p>
+        </div>
+
+    </div>
+
+    <h2 style="margin-top: 15px; margin-bottom: 5px;">II. Restauration & Survie</h2>
+    <div class="grid">
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-comment-medical icon-telepathie"></i>
+                <span class="spell-title">Mot de guérison</span>
+            </div>
+            <div class="meta">Action bonus | 18 mètres | Instantané</div>
+            <p>Soigne un allié visible à portée de <strong>1d4 + Sagesse</strong>. C'est une action bonus, parfait pour soigner tout en attaquant.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-hand-holding-medical icon-soin"></i>
+                <span class="spell-title">Soin des blessures</span>
+            </div>
+            <div class="meta">1 action | Contact | Instantané</div>
+            <p>Infection d'énergie curative par contact. Restaure une bonne réserve de PV : <strong>1d8 + Sagesse</strong>. Corps à corps requis.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-apple-whole icon-baie"></i>
+                <span class="spell-title">Baies nourricières</span>
+            </div>
+            <div class="meta">1 action | Contact | Durée : 24 heures</div>
+            <p>Fait apparaître 10 baies. Manger une baie redonne <strong>1 PV fixe</strong> et nourrit une personne pour une journée entière.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-dog icon-gourdin"></i>
+                <span class="spell-title">Parler avec animaux</span>
+            </div>
+            <div class="meta">1 action | Personnel | Durée : 10 minutes</div>
+            <p>Permet de comprendre les animaux et de communiquer verbalement avec eux pour obtenir des indices ou de petits services.</p>
+        </div>
+
+    </div>
+    <div class="page-number">- Page 5 -</div>
+</div>
+
+<div class="page">
+    <h1>Sorts de Niveau 1 (Page 2/2)</h1>
+    
+    <h2 style="margin-top: 10px; margin-bottom: 5px;">III. Détections & Pureté de la Nature</h2>
+    <div class="grid">
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-eye icon-detection"></i>
+                <span class="spell-title">Détection de la magie</span>
+            </div>
+            <div class="meta">1 action | Personnel | Conc. (10 min)</div>
+            <p>Perçoit les lueurs magiques à 9 mètres. Permet de connaître l'école de magie de l'objet ou de la créature ciblée.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-biohazard icon-poison"></i>
+                <span class="spell-title">Dét. poisons / maladies</span>
+            </div>
+            <div class="meta">1 action | Personnel | Conc. (10 min)</div>
+            <p>Permet de déceler la présence et le type de poisons, de créatures vénéneuses ou de maladies dans un rayon de 9 mètres.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-faucet-drip icon-eau"></i>
+                <span class="spell-title">Purification nourriture</span>
+            </div>
+            <div class="meta">1 action | 3 mètres | Instantané</div>
+            <p>Purifie et rend immédiatement consommables les aliments et les boissons non magiques gâtés, empoisonnés ou rances dans un rayon de 1,5m.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-droplet icon-eau"></i>
+                <span class="spell-title">Création / Dest. d'eau</span>
+            </div>
+            <div class="meta">1 action | 9 mètres | Instantané</div>
+            <p>Crée ou détruit jusqu'à 40 litres d'eau pure dans un récipient ou sous forme de pluie/brouillard léger sur une zone de 9m.</p>
+        </div>
+
+    </div>
+
+    <h2 style="margin-top: 15px; margin-bottom: 5px;">IV. Altérations & Esprit Sauvage</h2>
+    <div class="grid">
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-heart icon-charme"></i>
+                <span class="spell-title">Amitié avec les animaux</span>
+            </div>
+            <div class="meta">1 action | 9 mètres | Durée : 24 heures</div>
+            <p>Convainc une bête sauvage que je ne lui veux aucun mal. Elle doit réussir un jet de <strong>Sagesse</strong> ou être charmée pendant 24h.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-wand-magic icon-charme"></i>
+                <span class="spell-title">Charme-personne</span>
+            </div>
+            <div class="meta">1 action | 9 mètres | Durée : 1 heure</div>
+            <p>Charme un humanoïde. La cible fait un jet de <strong>Sagesse</strong> avec avantage s'il est en combat. S'il rate, il me considère comme un ami.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-smog icon-brouillard"></i>
+                <span class="spell-title">Nuage de brouillard</span>
+            </div>
+            <div class="meta">1 action | 36 mètres | Conc. (1 heure)</div>
+            <p>Invoque une sphère de brouillard dense de 6m de rayon. La zone est fortement obscurcie (bloque la vision, idéal pour fuir).</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-arrow-up-long icon-vitesse"></i>
+                <span class="spell-title">Saut</span>
+            </div>
+            <div class="meta">1 action | Contact | Durée : 1 minute</div>
+            <p>Je touche une créature. Sa distance de saut vertical et horizontal est instantanément <strong>triplée</strong> jusqu'à la fin du sort.</p>
+        </div>
+
+    </div>
+    <div class="page-number">- Page 6 -</div>
+</div>
+
+
+<div class="page">
+    <h1>Sorts de Niveau 2 (Page 1/3)</h1>
+    
+    <h2 style="margin-top: 10px; margin-bottom: 5px;">I. Puissance de la Lune & Contrôle</h2>
+    <div class="grid">
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-moon icon-lune"></i>
+                <span class="spell-title">Rayon de lune</span>
+            </div>
+            <div class="meta">1 action | 36 mètres | Conc. (1 min)</div>
+            <p>Faisceau d'argent divin (rayon de 1,5m). Entrer ou y commencer son tour inflige <strong>2d10 dégâts radiants</strong> (JS Const.). Déplaçable de 18m par tour.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-burst icon-flamme"></i>
+                <span class="spell-title">Croissance d'épines</span>
+            </div>
+            <div class="meta">1 action | 45 mètres | Conc. (10 min)</div>
+            <p>Zone de 6m de rayon piégée de pointes. Terrain difficile. Traverser la zone inflige <strong>2d4 dégâts perforants tous les 1,5 mètres</strong> parcourus.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-fire icon-metal"></i>
+                <span class="spell-title">Chaleur de métal</span>
+            </div>
+            <div class="meta">1 action | 18 mètres | Conc. (1 min)</div>
+            <p>Cible un objet en métal porté. Inflige <strong>2d8 dégâts de feu</strong> immédiats + désavantage aux jets. Réactivable en action bonus.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-lock icon-vision"></i>
+                <span class="spell-title">Immobilisation</span>
+            </div>
+            <div class="meta">1 action | 18 mètres | Conc. (1 min)</div>
+            <p>Paralyse un humanoïde. Jet de <strong>Sagesse</strong> pour résister. Si échoué, la cible est <strong>paralysée</strong> (attaques au corps à corps critiques auto).</p>
+        </div>
+
+    </div>
+
+    <h2 style="margin-top: 15px; margin-bottom: 5px;">II. Protection & Discrétion Sauvage</h2>
+    <div class="grid">
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-shoe-prints icon-discretion"></i>
+                <span class="spell-title">Passage sans trace</span>
+            </div>
+            <div class="meta">1 action | Personnel | Conc. (1 heure)</div>
+            <p>Voile de silence et d'shadows à 9m de rayon. Confère un bonus colossal de <strong>+10 aux tests de Discrétion</strong> du groupe. Inciblable au pistage non-magique.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-tree icon-gourdin"></i>
+                <span class="spell-title">Peau d'écorce</span>
+            </div>
+            <div class="meta">1 action | Contact | Conc. (1 heure)</div>
+            <p>La peau devient de l'écorce robuste. La Classe d'Armure (CA) de la cible <strong>ne peut pas être inférieure à 16</strong>, même sous forme animale.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-kit-medical icon-resilience"></i>
+                <span class="spell-title">Restauration partielle</span>
+            </div>
+            <div class="meta">1 action | Contact | Instantané</div>
+            <p>Purifie le corps d'un allié par contact. Guérit instantanément d'un effet au choix : <strong>aveuglé, sourd, paralysé ou empoisonné</strong>.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-heart-pulse icon-moisson"></i>
+                <span class="spell-title">Esprit de guérison</span>
+            </div>
+            <div class="meta">1 action | 18 mètres | Conc. (1 min)</div>
+            <p>Invoque un petit esprit de la nature. Traverser ou y commencer son tour redonne <strong>1d6 PV</strong>. Utilisable un nombre de fois égal à <strong>1 + Sagesse</strong>.</p>
+        </div>
+
+    </div>
+    <div class="page-number">- Page 7 -</div>
+</div>
+
+<div class="page">
+    <h1>Sorts de Niveau 2 (Page 2/3)</h1>
+    
+    <h2 style="margin-top: 10px; margin-bottom: 5px;">III. Forces Élémentaires & Attributs</h2>
+    <div class="grid">
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-fire-flame-simple icon-flamme"></i>
+                <span class="spell-title">Lame de feu</span>
+            </div>
+            <div class="meta">Action bonus | Personnel | Conc. (10 min)</div>
+            <p>Fait jaillir une épée de feu pur. Permet de porter une attaque magique au corps à corps pour infliger <strong>3d6 dégâts de feu</strong> nets.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-circle-dot icon-flamme"></i>
+                <span class="spell-title">Sphère de feu</span>
+            </div>
+            <div class="meta">1 action | 18 mètres | Conc. (1 min)</div>
+            <p>Crée une sphère enflammée de 1,5m de rayon. Inflige <strong>2d6 dégâts de feu</strong> aux adjacents (JS Dex). Déplaçable de 9m via action bonus.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-wind icon-vent"></i>
+                <span class="spell-title">Rafale de vent</span>
+            </div>
+            <div class="meta">1 action | Perso (ligne 18m) | Conc. (1 min)</div>
+            <p>Un vent violent s'élance de moi. Les créatures dans la ligne doivent réussir un jet de <strong>Force</strong> ou être <strong>repoussées de 4,5 mètres</strong>.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-gem icon-robustesse"></i>
+                <span class="spell-title">Amélioration d'aptitude</span>
+            </div>
+            <div class="meta">1 action | Contact | Conc. (1 heure)</div>
+            <p>Donne l'<strong>avantage</strong> sur les tests d'une caractéristique au choix (Ex : Endurance donne aussi +2d6 PV temporaires).</p>
+        </div>
+
+    </div>
+
+    <h2 style="margin-top: 15px; margin-bottom: 5px;">IV. Instinct Sauvage & Traque</h2>
+    <div class="grid">
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-dove icon-animaux"></i>
+                <span class="spell-title">Messager animal</span>
+            </div>
+            <div class="meta">1 action | 9 mètres | Durée : 24 heures</div>
+            <p>Envoie une bête minuscule porter un message parlé de 25 mots maximum à un endroit connu. La bête s'y rend à un rythme constant.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-paw icon-animaux"></i>
+                <span class="spell-title">Sens animal</span>
+            </div>
+            <div class="meta">1 action | Contact | Conc. (10 min)</div>
+            <p>Je touche une bête consentante. Je peux voir par ses yeux et entendre par ses oreilles tant que nous restons sur le même plan.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-compass icon-pierre"></i>
+                <span class="spell-title">Localisation d'anim/plantes</span>
+            </div>
+            <div class="meta">1 action | Personnel | Portée : 8 km</div>
+            <p>Décrit une espèce de plante ou d'animal. Le sort m'indique instantanément la direction et la distance de la cible la plus proche.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-magnifying-glass icon-vision"></i>
+                <span class="spell-title">Localisation d'objet</span>
+            </div>
+            <div class="meta">1 action | Personnel | Conc. (10 min)</div>
+            <p>Permet de ressentir la direction d'un objet connu ou décrit précisément tant qu'il se trouve dans un rayon de 300 mètres.</p>
+        </div>
+
+    </div>
+    <div class="page-number">- Page 8 -</div>
+</div>
+
+<div class="page">
+    <h1>Sorts de Niveau 2 & Capacité (Page 3/3)</h1>
+    
+    <h2 style="margin-top: 10px; margin-bottom: 5px;">V. Vigilance & Remèdes de la Terre</h2>
+    <div class="grid">
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-eye icon-vision"></i>
+                <span class="spell-title">Vision dans le noir</span>
+            </div>
+            <div class="meta">1 action | Contact | Durée : 8 heures</div>
+            <p>Accorde une vision dans le noir complète à une portée de 18 mètres à la créature touchée. Fort utile pour mes alliés humains ou elfes !</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-triangle-exclamation icon-detection"></i>
+                <span class="spell-title">Détection des pièges</span>
+            </div>
+            <div class="meta">1 action | 36 mètres | Instantané</div>
+            <p>Permet de détecter instantanément la présence de pièges créés à dessein (mécaniques, magiques ou environnementaux) dans ma ligne de mire.</p>
+        </div>
+
+        <div class="spell-box">
+            <div class="spell-header">
+                <i class="fa-solid fa-shield-virus icon-resilience"></i>
+                <span class="spell-title">Protection contre poison</span>
+            </div>
+            <div class="meta">1 action | Contact | Durée : 1 heure</div>
+            <p>Neutralise un poison actif sur une créature. Confère l'<strong>avantage</strong> sur les JS contre le poison et la <strong>résistance</strong> à ses dégâts pendant 1h.</p>
+        </div>
+
+    </div>
+
+    <h2 style="margin-top: 25px; margin-bottom: 5px; color: #d4af37;">✦ Option de Classe (Cercle de la Lune)</h2>
+    <div class="grid">
+
+        <div class="spell-box" style="border: 2px dashed #d4af37; background: rgba(212, 175, 55, 0.03);">
+            <div class="spell-header">
+                <i class="fa-solid fa-paw" style="color: #d4af37;"></i>
+                <span class="spell-title" style="color: #d4af37; font-weight: bold;">Forme Sauvage de Combat (Soin)</span>
+            </div>
+            <div class="meta" style="border-bottom: 1px solid rgba(212, 175, 55, 0.2);">Action bonus | Personnel | En forme animale</div>
+            <p>Tant que tu es transformé en bête, tu peux utiliser une <strong>action bonus</strong> pour dépenser (brûler) un emplacement de sort et te soigner.</p>
+            <p style="margin-top: 8px; font-size: 0.9em; font-style: italic; opacity: 0.9;">
+                <strong>Restauration :</strong> Tu récupères instantanément <strong>1d8 PV</strong> par niveau de l'emplacement sacrifié.<br>
+                • Emplacement Niv. 1 ➔ <strong>1d8 PV</strong><br>
+                • Emplacement Niv. 2 ➔ <strong>2d8 PV</strong>
+            </p>
+        </div>
+
+    </div>
+    
+    <div class="page-number">- Page 9 -</div>
+</div>
+
+</body>
+</html>
